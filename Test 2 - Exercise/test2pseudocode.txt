@@ -1,0 +1,32 @@
+DEFINE VALID_CHANNELS as a list containing ['TV1', 'TV2', 'TV3', 'NTV7', 'TV8']
+
+DEFINE is_valid_channel function with one argument 'channel'
+    CONVERT channel to uppercase
+    IF channel is in VALID_CHANNELS
+        RETURN True
+    ELSE
+        RETURN False
+JOC
+DEFINE TVChannel function
+    LOOP forever
+        PRINT "Enter a TV channel: "
+        READ user input into channel
+        IF is_valid_channel(channel) is True
+            OPEN 'channel.txt' in write mode as file
+            WRITE channel in uppercase to file
+            CLOSE file
+            PRINT "Channel saved to file."
+            BREAK out of loop
+        ELSE
+            PRINT "Wrong Channel"
+
+DEFINE display_channel function
+    OPEN 'channel.txt' in read mode as file
+    READ the content of the file into channel
+    IF channel is not empty
+        PRINT "The current TV channel is: " + channel
+    ELSE
+        PRINT "No TV channel saved."
+
+CALL TVChannel function to get a channel from the user and save it to a file
+CALL display_channel function to read and display the channel from the file
